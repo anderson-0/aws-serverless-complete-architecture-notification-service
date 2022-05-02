@@ -13,9 +13,9 @@ provider:
     - ${file(iam/SendMailIAM.yml):SendMailIAM}
   
 functions:
-  hello:
+  sendMail:
     handler: src/handlers/sendMail.handler
     events:
       - http:
-          method: GET
+          method: POST
           path: /sendMail
