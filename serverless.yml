@@ -12,8 +12,8 @@ provider:
   
 functions:
   hello:
-    handler: src/handlers/hello.handler
+    handler: src/handlers/sendMail.handler
     events:
       - http:
           method: GET
-          path: /hello
+          path: /sendMail
