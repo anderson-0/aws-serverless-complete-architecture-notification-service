@@ -2,8 +2,6 @@ service: notification-service
 
 plugins:
   - serverless-bundle
-  - serverless-pseudo-parameters
-
 provider:
   name: aws
   runtime: nodejs14.x
