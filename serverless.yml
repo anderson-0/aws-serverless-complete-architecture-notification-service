@@ -16,9 +16,9 @@ functions:
   sendMail:
     handler: src/handlers/sendMail.handler
     events:
-      - http:
-          method: POST
-          path: /sendMail
+      - sqs:
+          arn: ${self:custom.mailQueue.arn}
+          batchSize: 1 # process 1 email at a time
         
 resources:
   Resources:
