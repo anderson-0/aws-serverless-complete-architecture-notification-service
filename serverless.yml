@@ -2,6 +2,7 @@ service: notification-service
 
 plugins:
   - serverless-bundle
+
 provider:
   name: aws
   runtime: nodejs14.x
@@ -9,6 +10,7 @@ provider:
   stage: ${opt:stage, 'dev'}
   iamRoleStatements:
     - ${file(iam/SendMailIAM.yml):SendMailIAM}
+    - ${file(iam/MailQueueIAM.yml):MailQueueIAM}
   
 functions:
   sendMail:
@@ -17,3 +19,12 @@ functions:
       - http:
           method: POST
           path: /sendMail
+        
+resources:
+  Resources:
+    MailQueue: ${file(resources/MailQueue.yml):MailQueue}
+
+custom:
+  mailQueue:
+    name: MailQueue-${self:provider.stage}
+    arn: !GetAtt MailQueue.Arn
